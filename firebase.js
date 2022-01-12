@@ -5,9 +5,10 @@ import {
   collection,
   addDoc,
   getDocs,
+  getDoc,
   onSnapshot,
   deleteDoc,
-  doc
+  doc,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 import { firebaseConfig } from "./firebaseConfig.js";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -25,6 +26,9 @@ export const saveTask = (title, description) =>
 
 export const getTasks = () => getDocs(collection(db, "tasks"));
 
-export const onGetTask = (callback) => onSnapshot(collection(db, "tasks"), callback)
+export const getTask = (id) => getDoc(doc(db, "tasks", id));
 
-export const deleteTask = id => deleteDoc(doc(db, "tasks",id))
+export const onGetTask = (callback) =>
+  onSnapshot(collection(db, "tasks"), callback);
+
+export const deleteTask = (id) => deleteDoc(doc(db, "tasks", id));

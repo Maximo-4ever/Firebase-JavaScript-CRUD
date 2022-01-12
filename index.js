@@ -4,11 +4,13 @@ import {
   getTask,
   onGetTask,
   deleteTask,
+  updateTask,
 } from "./firebase.js";
 
 const taskForm = document.getElementById("task-form");
 const tasksContainer = document.getElementById("tasks-container");
 let editStatus = false;
+let id;
 
 window.addEventListener("DOMContentLoaded", async () => {
   onGetTask((querySnapshot) => {
@@ -26,7 +28,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         `;
     });
     tasksContainer.innerHTML = html;
-    tasksContainer.addEventListener("click", async({ target }) => {
+    tasksContainer.addEventListener("click", async ({ target }) => {
       if (target.className === "btn-delete") {
         deleteTask(target.dataset.id);
       }
@@ -36,6 +38,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         taskForm["task-title"].value = task.title;
         taskForm["task-description"].value = task.description;
         editStatus = true;
+        id = doc.id
+
+        taskForm["btn-task-save"].textContent = "Update"
       }
     });
   });
@@ -46,7 +51,8 @@ taskForm.addEventListener("submit", (e) => {
   const title = taskForm["task-title"];
   const description = taskForm["task-description"];
   if (editStatus) {
-    console.log("Actualizando");
+    updateTask(id, {title:title.value, description:description.value});
+    editStatus = false;
   } else {
     saveTask(title.value, description.value);
   }

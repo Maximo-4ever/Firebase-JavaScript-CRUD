@@ -8,6 +8,7 @@ import {
   getDoc,
   onSnapshot,
   deleteDoc,
+  updateDoc,
   doc,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 import { firebaseConfig } from "./firebaseConfig.js";
@@ -24,11 +25,17 @@ const db = getFirestore();
 export const saveTask = (title, description) =>
   addDoc(collection(db, "tasks"), { title, description });
 
-export const getTasks = () => getDocs(collection(db, "tasks"));
+export const getTasks = () => 
+  getDocs(collection(db, "tasks"));
 
-export const getTask = (id) => getDoc(doc(db, "tasks", id));
+export const getTask = (id) => 
+  getDoc(doc(db, "tasks", id));
 
 export const onGetTask = (callback) =>
   onSnapshot(collection(db, "tasks"), callback);
 
-export const deleteTask = (id) => deleteDoc(doc(db, "tasks", id));
+export const deleteTask = (id) => 
+  deleteDoc(doc(db, "tasks", id));
+
+export const updateTask = (id, newFields) =>
+  updateDoc(doc(db, "tasks", id), newFields);

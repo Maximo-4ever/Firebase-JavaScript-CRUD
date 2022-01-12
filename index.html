@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Firebase Crud</title>
+  </head>
+  <body>
+    <form id="task-form">
+      <label for="title">Title</label>
+      <input type="text" placeholder="Task title" id="task-title" />
+      <label for="description">Description:</label>
+      <textarea id="task-description" rows="3" placeholder="Task description" ></textarea>
+      <button id="btn-task-save">Guardar</button>
+    </form>
+
+    <main id="tasks-container"></main>
+
+    <script src="./index.js" type="module"></script>
+  </body>
+</html>
